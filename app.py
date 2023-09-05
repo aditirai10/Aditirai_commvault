@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-# Directory where uploaded files will be stored
+
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -18,7 +18,7 @@ def upload_file():
     file = request.files['file']
 
     if email and filename and file:
-        # Ensure a unique file name using email and filename
+       
         unique_filename = f"{email}_{filename}.txt"
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], unique_filename))
         return 'File uploaded successfully'
@@ -31,8 +31,7 @@ def search():
     query = request.args.get('query')
 
     if email and query:
-        # Search for files that match the email and query
-        # You can implement your search logic here
+       
         results = [filename for filename in os.listdir(app.config['UPLOAD_FOLDER']) if email in filename and query in filename]
         return render_template('search_results.html', results=results)
     else:
